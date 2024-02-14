@@ -1,9 +1,15 @@
+type Meta = {
+  key: string;
+  value: string | number;
+};
+
 export type Token = {
   key: string;
   value: string;
   computedValue: string;
   type: string;
   url: string;
+  meta?: Meta[];
 };
 
 type TokenList = Token[];
@@ -15,6 +21,10 @@ export const tokens: TokenList = [
     computedValue: "#e30613",
     type: "colour",
     url: "https://lfds.netlify.app/visual-identity/colours/",
+    meta: [
+      { key: "Some metadata", value: 0 },
+      { key: "More metadata", value: "XYZ" },
+    ],
   },
   {
     key: "--lf-color-secondary",

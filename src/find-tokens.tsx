@@ -1,16 +1,19 @@
 import { List, ActionPanel, Action, Icon } from "@raycast/api";
 import { Token, tokens } from "./tokens";
 
-const getIcon = (token: Token) =>
+const getIcon = (token: Token): object =>
   token.type === "colour" ?
     { source: Icon.CircleFilled, tintColor: token.computedValue }
   : { source: Icon.CircleFilled };
 
-const getKeywords = (token: Token) => [
+const getKeywords = (token: Token): string[] => [
   ...token.value.split("-").filter((v) => v !== ""),
   ...token.computedValue.split("-").filter((v) => v !== ""),
   token.type,
 ];
+
+const getMeta = (token: Token): object[] =>
+  token.meta ? token.meta.map((m) => ({ text: `${m.key}: ${m.value}` })) : [];
 
 const findTokens = () => (
   <List>
@@ -25,7 +28,7 @@ const findTokens = () => (
           : `${token.value}: ${token.computedValue}`
         }
         keywords={getKeywords(token)}
-        accessories={[{ text: "Some metadata", icon: Icon.EyeDropper }]}
+        accessories={getMeta(token)}
         actions={
           <ActionPanel>
             <Action.CopyToClipboard title="Copy token name" content={token.key} />
