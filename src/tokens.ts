@@ -1,4 +1,14 @@
-const tokens = [
+export type Token = {
+  key: string;
+  value: string;
+  computedValue: string;
+  type: string;
+  url: string;
+};
+
+type TokenList = Token[];
+
+export const tokens: TokenList = [
   {
     key: "--lf-color-primary",
     value: "--lf-color-red",
@@ -14,5 +24,3 @@ const tokens = [
     url: "https://lfds.netlify.app/visual-identity/colours/",
   },
 ];
-
-export default tokens;

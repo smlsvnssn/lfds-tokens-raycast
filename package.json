@@ -2,7 +2,7 @@
   "$schema": "https://www.raycast.com/schemas/extension.json",
   "name": "lfds-tokens-raycast",
   "title": "LFDS Tokens",
-  "description": "",
+  "description": "Search design tokens from the LF design system.",
   "icon": "lf.png",
   "author": "smlsvnssn",
   "license": "MIT",
@@ -14,6 +14,10 @@
       "mode": "view"
     }
   ],
+  "prettier": {
+    "experimentalTernaries": true,
+    "printWidth": 100
+  },
   "dependencies": {
     "@raycast/api": "^1.67.1"
   },
