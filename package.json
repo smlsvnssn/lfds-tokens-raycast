@@ -3,7 +3,7 @@
   "name": "lfds-tokens-raycast",
   "title": "LFDS Tokens",
   "description": "",
-  "icon": "command-icon.png",
+  "icon": "lf.png",
   "author": "smlsvnssn",
   "license": "MIT",
   "commands": [

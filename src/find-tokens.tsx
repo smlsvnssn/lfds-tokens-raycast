@@ -1,34 +1,32 @@
-import { ActionPanel, Detail, List, Action, Icon, Color } from "@raycast/api";
+import { ActionPanel, Detail, List, Action, Icon } from "@raycast/api";
+import tokens from "./tokens.js";
+
+const getIcon = (token) => {
+  if (token.type === "colour") return { source: Icon.CircleFilled, tintColor: token.computedValue };
+  return { source: Icon.CircleFilled };
+};
 
 export default function Command() {
   return (
     <List>
-      <List.Item
-        icon={{ source: Icon.CircleFilled, tintColor: "#e30613" }}
-        title="Red"
-        subtitle="--lf-color-primary: #e30613"
-        accessories={[{ text: "Some metadata", icon: Icon.EyeDropper }]}
-        actions={
-          <ActionPanel>
-            <Action.CopyToClipboard title="Copy token name" content="#1" />
-            <Action.CopyToClipboard title="Copy token value" content="#1" />
-            <Action.OpenInBrowser title="Show in LFDS" url="https://github.com/raycast/extensions/pull/1" />
-          </ActionPanel>
-        }
-      />
-      <List.Item
-        icon={{ source: Icon.CircleFilled, tintColor: "#005AA0" }}
-        title="Blue"
-        subtitle="--lf-color-secondary: #005AA0"
-        accessories={[{ text: "Some metadata", icon: Icon.EyeDropper }]}
-        actions={
-          <ActionPanel>
-            <Action.CopyToClipboard title="Copy token name" content="#1" />
-            <Action.CopyToClipboard title="Copy token value" content="#1" />
-            <Action.OpenInBrowser title="Show in LFDS" url="https://github.com/raycast/extensions/pull/1" />
-          </ActionPanel>
-        }
-      />
+      {tokens.map((token) => (
+        <List.Item
+          icon={getIcon(token)}
+          key={token.key}
+          title={token.key}
+          subtitle={token.value === token.computedValue ? token.value : `${token.value}: ${token.computedValue}`}
+          keywords={[token.value, token.computedValue, token.type]}
+          whatevs={console.log([token.value, token.computedValue, token.type])}
+          accessories={[{ text: "Some metadata", icon: Icon.EyeDropper }]}
+          actions={
+            <ActionPanel>
+              <Action.CopyToClipboard title="Copy token name" content={token.key} />
+              <Action.CopyToClipboard title="Copy token value" content={token.value} />
+              <Action.OpenInBrowser title="Show in LFDS" url={token.url} />
+            </ActionPanel>
+          }
+        />
+      ))}
     </List>
   );
 }
